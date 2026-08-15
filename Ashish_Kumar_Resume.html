@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashish Kumar — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0f172a;
+      --ink2:     #334155;
+      --muted:    #64748b;
+      --line:     #e2e8f0;
+      --accent:   #1d4ed8;
+      --accent2:  #7c3aed;
+      --bg-side:  #f0f5ff;
+      --page-w:   210mm;
+    }
+
+    html { font-size: 13.5px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #dde3ec;
+      color: var(--ink);
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+    }
+
+    /* ── Print bar ─────────────────────────────────── */
+    .print-bar {
+      width: var(--page-w);
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .print-bar p { font-size: 0.8rem; color: #475569; }
+    .print-bar p strong { color: #0f172a; }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-print:hover { background: #1e40af; }
+
+    /* ── A4 page ───────────────────────────────────── */
+    .page {
+      width: var(--page-w);
+      max-width: 100%;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────── */
+    .sidebar {
+      background: var(--bg-side);
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      border-right: 1px solid #c7d8f8;
+    }
+
+    .sb-photo {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      margin: 0 auto;
+    }
+    .sb-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .sb-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* Contact */
+    .c-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .c-list li { font-size: 0.76rem; color: var(--ink2); }
+    .c-label { display: block; font-size: 0.64rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .c-list a { color: var(--accent); word-break: break-all; }
+
+    /* Skills */
+    .sk-group { margin-bottom: 0.75rem; }
+    .sk-group-title { font-size: 0.7rem; font-weight: 700; color: var(--ink2); margin-bottom: 0.35rem; }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+    .sk-tag {
+      font-size: 0.65rem; font-weight: 500;
+      background: #dbeafe; color: var(--accent);
+      border-radius: 4px; padding: 2px 6px;
+    }
+    .sk-tag.v { background: #ede9fe; color: var(--accent2); }
+    .sk-tag.g { background: #d1fae5; color: #065f46; }
+
+    /* Education */
+    .edu-item { margin-bottom: 0.75rem; }
+    .edu-deg  { font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+    .edu-sch  { font-size: 0.72rem; color: var(--accent); font-weight: 500; }
+    .edu-yr   { font-size: 0.68rem; color: var(--muted); margin-top: 0.08rem; }
+
+    /* Language dots */
+    .lang-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: var(--ink2); margin-bottom: 0.3rem; }
+    .dots { display: flex; gap: 3px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #c7d2fe; }
+    .dot.f { background: var(--accent); }
+
+    /* ── MAIN ──────────────────────────────────────── */
+    .main { padding: 2rem 1.8rem; display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .main-header { border-bottom: 2px solid var(--line); padding-bottom: 0.9rem; }
+    .main-name  { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); line-height: 1.1; }
+    .main-role  { font-size: 0.92rem; font-weight: 500; color: var(--accent); margin-top: 0.18rem; }
+    .main-sub   { font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .sec-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.28rem; margin-bottom: 0.75rem;
+    }
+
+    /* Objective */
+    .obj-text { font-size: 0.82rem; color: var(--ink2); line-height: 1.7; }
+
+    /* Projects */
+    .proj-item { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+    .proj-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .proj-hdr { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.2rem; }
+    .proj-name { font-size: 0.86rem; font-weight: 700; color: var(--ink); }
+    .proj-tech {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.64rem;
+      color: var(--accent2); background: #ede9fe;
+      padding: 2px 6px; border-radius: 4px; white-space: nowrap;
+    }
+    .proj-desc { font-size: 0.78rem; color: var(--ink2); line-height: 1.6; }
+    .proj-desc ul { padding-left: 1rem; margin-top: 0.15rem; }
+    .proj-desc li { margin-bottom: 0.08rem; }
+
+    /* Achievements */
+    .ach-list { list-style: none; display: flex; flex-direction: column; gap: 0.38rem; }
+    .ach-list li { font-size: 0.8rem; color: var(--ink2); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.5; }
+    .ach-list li::before { content: '▸'; color: var(--accent); font-size: 0.62rem; margin-top: 0.18rem; flex-shrink: 0; }
+
+    /* Strengths */
+    .str-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1rem; }
+    .str-item { font-size: 0.78rem; color: var(--ink2); display: flex; align-items: center; gap: 0.35rem; }
+    .str-item::before { content: '★'; color: #f59e0b; font-size: 0.64rem; flex-shrink: 0; }
+
+    /* ── Print ─────────────────────────────────────── */
+    @media print {
+      @page { size: A4; margin: 0; }
+      body { background: none; padding: 0; }
+      .print-bar { display: none; }
+      .page { width: 210mm; box-shadow: none; }
+    }
+
+    @media (max-width: 640px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid #c7d8f8; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <p><strong>Ashish Kumar — Resume</strong> &nbsp; Press <kbd>Ctrl+P</kbd> → "Save as PDF" to download</p>
+    <button class="btn-print" onclick="window.print()">&#x2B73; Download PDF</button>
+  </div>
+
+  <div class="page">
+
+    <!-- ── SIDEBAR ──────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <div class="sb-photo">
+        <img src="media/profile_circle.png" alt="Ashish Kumar" />
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div class="sb-title">Contact</div>
+        <ul class="c-list">
+          <li><span class="c-label">Phone</span>+91 7988862764</li>
+          <li><span class="c-label">Email</span><a href="mailto:ashishkumarsir8@gmail.com">ashishkumarsir8@gmail.com</a></li>
+          <li><span class="c-label">LinkedIn</span><a href="https://www.linkedin.com/in/ashish-kumar-539b87364" target="_blank">ashish-kumar-539b87364</a></li>
+          <li><span class="c-label">Location</span>Ambala, Haryana, India</li>
+        </ul>
+      </div>
+
+      <!-- Technical Skills -->
+      <div>
+        <div class="sb-title">Technical Skills</div>
+
+        <div class="sk-group">
+          <div class="sk-group-title">Programming Languages</div>
+          <div class="sk-tags">
+            <span class="sk-tag">Java</span>
+            <span class="sk-tag">C</span>
+            <span class="sk-tag">C++</span>
+          </div>
+        </div>
+
+        <div class="sk-group">
+          <div class="sk-group-title">Web Technologies</div>
+          <div class="sk-tags">
+            <span class="sk-tag v">HTML</span>
+            <span class="sk-tag v">CSS</span>
+          </div>
+        </div>
+
+        <div class="sk-group">
+          <div class="sk-group-title">Concepts</div>
+          <div class="sk-tags">
+            <span class="sk-tag g">Basic DSA</span>
+            <span class="sk-tag g">Problem Solving</span>
+            <span class="sk-tag g">OOP</span>
+            <span class="sk-tag g">Programming Fundamentals</span>
+          </div>
+        </div>
+
+        <div class="sk-group">
+          <div class="sk-group-title">Tools</div>
+          <div class="sk-tags">
+            <span class="sk-tag">VS Code</span>
+            <span class="sk-tag">IntelliJ IDEA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div>
+        <div class="sb-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-deg">B.Tech — Information Technology</div>
+          <div class="edu-sch">Chandigarh Group Of Colleges</div>
+          <div class="edu-yr">2024 – 2028 &nbsp;·&nbsp; 2nd Year</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">12th Grade (Science)</div>
+          <div class="edu-sch">Senior Secondary School</div>
+          <div class="edu-yr">76.6% &nbsp;·&nbsp; 2024</div>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div>
+        <div class="sb-title">Languages Known</div>
+        <div class="lang-row">Hindi <div class="dots"><div class="dot f"></div><div class="dot f"></div><div class="dot f"></div><div class="dot f"></div><div class="dot f"></div></div></div>
+        <div class="lang-row">English <div class="dots"><div class="dot f"></div><div class="dot f"></div><div class="dot f"></div><div class="dot f"></div><div class="dot"></div></div></div>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN ─────────────────────────────────────── -->
+    <main class="main">
+
+      <!-- Header -->
+      <div class="main-header">
+        <div class="main-name">Ashish Kumar</div>
+        <div class="main-role">Java Programmer &nbsp;·&nbsp; B.Tech IT Student</div>
+        <div class="main-sub">2nd Year &nbsp;|&nbsp; Chandigarh Group Of Colleges &nbsp;|&nbsp; Ambala, Haryana</div>
+      </div>
+
+      <!-- Career Objective -->
+      <div>
+        <div class="sec-title">Career Objective</div>
+        <p class="obj-text">
+          Motivated and enthusiastic B.Tech Information Technology student currently in the second year,
+          seeking opportunities to enhance programming skills and gain practical experience in software
+          development. Eager to contribute to innovative projects while continuously learning new
+          technologies.
+        </p>
+      </div>
+
+      <!-- Academic Projects -->
+      <div>
+        <div class="sec-title">Academic Projects</div>
+
+        <div class="proj-item">
+          <div class="proj-hdr">
+            <span class="proj-name">Expense Tracker System</span>
+            <span class="proj-tech">Java &nbsp;·&nbsp; OOP &nbsp;·&nbsp; Collections</span>
+          </div>
+          <div class="proj-desc">
+            <ul>
+              <li>Developed a console-based application to manage income and expenses with category-wise tracking and budget management.</li>
+              <li>Implemented features for adding transactions, generating financial reports, and summarising monthly spending using OOP and Java Collections Framework.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="proj-item">
+          <div class="proj-hdr">
+            <span class="proj-name">Personal Portfolio Website</span>
+            <span class="proj-tech">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript</span>
+          </div>
+          <div class="proj-desc">
+            <ul>
+              <li>Designed and built a fully responsive personal portfolio website from scratch without any framework.</li>
+              <li>Features typing animation, scroll-reveal effects, a certificate gallery with lightbox viewer, and a contact form.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Achievements / Activities -->
+      <div>
+        <div class="sec-title">Achievements / Activities</div>
+        <ul class="ach-list">
+          <li>Participated in coding practice on competitive programming platforms HackerRank and CodeChef.</li>
+          <li>Active learner in programming and problem solving — completed 15 certifications on LinkedIn Learning.</li>
+          <li>Participated in a college-level hackathon, collaborating in a team to build a software solution under time constraints.</li>
+        </ul>
+      </div>
+
+      <!-- Strengths -->
+      <div>
+        <div class="sec-title">Strengths</div>
+        <div class="str-grid">
+          <div class="str-item">Quick Learner</div>
+          <div class="str-item">Strong Problem-Solving Ability</div>
+          <div class="str-item">Team Collaboration</div>
+          <div class="str-item">Time Management</div>
+        </div>
+      </div>
+
+      <!-- LinkedIn Certifications -->
+      <div>
+        <div class="sec-title">Certifications — LinkedIn Learning (15)</div>
+        <ul class="ach-list">
+          <li>LinkedIn Learning</li>
+          <li>Smart India Hackathon</li>
+          <li>NPTEL Object Oriented Programming</li>
+        </ul>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
